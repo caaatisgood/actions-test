@@ -26,6 +26,7 @@ jobs:
           echo "Raw: $raw"
           branch=${raw##*/}
           echo "Branch: $branch"
+          echo "from GITHUB_REF: ${GITHUB_REF##*/}"
       # - name: Print branch
       #   run: echo ${{ env.BRANCH }}
       # - name: Exit if not on main branch
