@@ -22,9 +22,10 @@ jobs:
           echo "branch=$branch" >> $GITHUB_ENV
           echo "Branch: $branch"
       - name: Exit if not on main branch
-        if: ${{ env.branch != 'main' }}
         run: |
-          echo "Exit because not on main branch"
-          exit 1
+          if [ "${{ env.branch }}" != "main" ]; then
+            echo "Error: Branch is not main"
+            exit 1
+          fi
       - name: Done
         run: echo Done deploying
