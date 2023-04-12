@@ -18,8 +18,7 @@ jobs:
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw##*/}
+          branch=$(git rev-parse --symbolic-full-name refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
           echo $branch
       # - name: Print branch
       #   run: echo ${{ env.BRANCH }}
