@@ -23,7 +23,7 @@ jobs:
       - name: Exit if not on main branch
         run: |
           if [ "${{ env.branch }}" != "main" ]; then
-            echo "Error: Branch is not staging, branch: ${{ env.branch }}"
+            echo "Error: Branch is not main, branch: ${{ env.branch }}"
             exit 1
           fi
       - name: Done
