@@ -10,22 +10,20 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Get branch test
-        run: |
-          echo ${{ github.ref }}
-          echo ${{ github.base_ref }}
-          echo ${{ github.event.base_ref }}
+        run: echo ${{ github.ref }}
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
-          branch=$(git rev-parse --symbolic-full-name refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-          echo $branch
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo "$branch"
       # - name: Print branch
       #   run: echo ${{ env.BRANCH }}
       # - name: Exit if not on main branch
       #   if: endsWith(${{ env.BRANCH }}, 'main') == false
       #   run: exit -1
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Done
         run: echo Done deploying
