@@ -17,6 +17,8 @@ jobs:
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
+          curr_b=$(git branch --show-current)
+          echo "current branch: $curr_b"
           raw=$(git branch -r --contains ${{ github.ref }})
           echo "Raw: $raw"
           branch=${raw##*/}
