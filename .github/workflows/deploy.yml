@@ -20,7 +20,7 @@ jobs:
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
-          echo "$branch"
+          echo $branch
       # - name: Print branch
       #   run: echo ${{ env.BRANCH }}
       # - name: Exit if not on main branch
