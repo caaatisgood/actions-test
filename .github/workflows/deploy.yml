@@ -19,20 +19,15 @@ jobs:
           echo "github.ref: ${{ github.ref }}"
           echo "github.base_ref: ${{ github.base_ref }}"
           echo "github.event.base_ref: ${{ github.event.base_ref }}"
-      - name: Get branch
-        # echo "BRANCH=$branch" >> $GITHUB_ENV
+      - name: Get current branch
+        id: get_current_branch
         run: |
-          curr_b=$(git branch --show-current)
-          echo "current branch: $curr_b"
           raw=$(git branch -r --contains ${{ github.ref }})
-          echo "Raw: $raw"
           branch=${raw##*/}
+          echo "branch=$branch" >> $GITHUB_ENV
           echo "Branch: $branch"
-          echo "from GITHUB_REF: ${GITHUB_REF##*/}"
-      # - name: Print branch
-      #   run: echo ${{ env.BRANCH }}
-      # - name: Exit if not on main branch
-      #   if: endsWith(${{ env.BRANCH }}, 'main') == false
-      #   run: exit -1
+      - name: Exit if not on main branch
+        if: ${{ steps.get_current_branch.outputs.branch != 'main' }}
+        run: exit -1
       - name: Done
         run: echo Done deploying
