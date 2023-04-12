@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get branch
+        # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
-          echo "BRANCH=$branch" >> $GITHUB_ENV
-      - name: Print branch
-        run: echo "$branch"
+          echo "$branch"
+      # - name: Print branch
+      #   run: echo ${{ env.BRANCH }}
       # - name: Exit if not on main branch
       #   if: endsWith(${{ env.BRANCH }}, 'main') == false
       #   run: exit -1
