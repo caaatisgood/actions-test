@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get branch test
-        run: echo ${{ github.ref }}
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.base_ref }}
+          echo ${{ github.event.base_ref }}
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
