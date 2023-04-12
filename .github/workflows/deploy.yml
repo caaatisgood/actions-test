@@ -28,6 +28,8 @@ jobs:
           echo "Branch: $branch"
       - name: Exit if not on main branch
         if: ${{ steps.get_current_branch.outputs.branch != 'main' }}
-        run: exit -1
+        run: |
+          echo "Exit because not on main branch"
+          exit 1
       - name: Done
         run: echo Done deploying
