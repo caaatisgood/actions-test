@@ -13,7 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Get branch test
-        run: echo ${{ github.ref }}
+        run: |
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.base_ref: ${{ github.base_ref }}"
+          echo "github.event.base_ref: ${{ github.event.base_ref }}"
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
