@@ -15,6 +15,7 @@ jobs:
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
           echo "BRANCH=$branch" >> $GITHUB_ENV
+          echo "$branch"
       - name: Exit if not on main branch
         if: endsWith(${{ env.BRANCH }}, 'main') == false
         run: exit -1
