@@ -13,21 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-         fetch-depth: 0
-      - name: Get branch test
-        run: |
-          echo "github.ref: ${{ github.ref }}"
-          echo "github.base_ref: ${{ github.base_ref }}"
-          echo "github.event.base_ref: ${{ github.event.base_ref }}"
+          fetch-depth: 0
       - name: Get current branch
         id: get_current_branch
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
-          echo "branch=$branch" >> $GITHUB_OUTPUT
+          echo "branch=$branch" >> $GITHUB_ENV
           echo "Branch: $branch"
       - name: Exit if not on main branch
-        if: ${{ steps.get_current_branch.outputs.branch != 'main' }}
+        if: ${{ env.branch != 'main' }}
         run: |
           echo "Exit because not on main branch"
           exit 1
