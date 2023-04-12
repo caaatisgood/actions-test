@@ -10,6 +10,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Get branch test
+        run: echo ${{ github.ref }}
       - name: Get branch
         # echo "BRANCH=$branch" >> $GITHUB_ENV
         run: |
