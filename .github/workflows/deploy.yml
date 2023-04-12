@@ -16,7 +16,7 @@ jobs:
           branch=${raw##*/}
           echo "BRANCH=$branch" >> $GITHUB_ENV
       - name: Exit if not on main branch
-        if: endsWith(env.BRANCH, 'main') == false
+        if: endsWith(${{ env.BRANCH }}, 'main') == false
         run: exit -1
       - name: Checkout code
         uses: actions/checkout@v3
